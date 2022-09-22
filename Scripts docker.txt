@@ -1,0 +1,36 @@
+---- Create mysql DB on docker with password admin, mysql-server as server name and
+ports 33006 VERY IMPORTANT THIS PORT!!
+
+docker run --name mysql-server -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -d mysql
+
+---- Start container server
+start mysql-server
+
+----- view all image running
+docker ps
+
+----- DOT NET Creación de solution
+dotnet new sln
+----- DOT NET Create API
+dotnet new webapi -o API
+----- DOT NET Add api to solution
+dotnet sln add .\API\
+----- DOT NET LIST SOLUTION
+dotnet sln list
+----- DOT NET ADD C# LIBRARY
+dotnet new classlib -o Core
+----- DOT NET ADD core to solution
+dotnet sln add .\Core\
+
+------ DOT NET PROJECT REFERENCES
+>cd Infrastructure
+>dotnet add reference ..\Core\
+
+----- DOT NET ADD EF CORE in project
+Infrastructure>dotnet add package Microsoft.EntityFrameworkCore --version 6.0.9
+----- DOT NET ADD EF Core for MySQL
+dotnet add package Pomelo.EntityFrameworkCore.MySql
+----- DOT NET INSTAL EF UTILITIES
+dotnet tool install --global dotnet-ef
+----- DOT NET EF UPDATE DATABASE WITH MIGRATION
+>dotnet ef database update -p .\Infrastructure\ -s .\API\
