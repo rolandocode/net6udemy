@@ -1,0 +1,12 @@
+C:\Users\Rolando\Desktop\Udemy\NET 6\Creando Web APIs profesionales con NET 6\visualstudio\tienda\Core\bin\Debug\net6.0\Core.deps.json
+C:\Users\Rolando\Desktop\Udemy\NET 6\Creando Web APIs profesionales con NET 6\visualstudio\tienda\Core\bin\Debug\net6.0\Core.dll
+C:\Users\Rolando\Desktop\Udemy\NET 6\Creando Web APIs profesionales con NET 6\visualstudio\tienda\Core\bin\Debug\net6.0\Core.pdb
+C:\Users\Rolando\Desktop\Udemy\NET 6\Creando Web APIs profesionales con NET 6\visualstudio\tienda\Core\obj\Debug\net6.0\Core.csproj.AssemblyReference.cache
+C:\Users\Rolando\Desktop\Udemy\NET 6\Creando Web APIs profesionales con NET 6\visualstudio\tienda\Core\obj\Debug\net6.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rolando\Desktop\Udemy\NET 6\Creando Web APIs profesionales con NET 6\visualstudio\tienda\Core\obj\Debug\net6.0\Core.AssemblyInfoInputs.cache
+C:\Users\Rolando\Desktop\Udemy\NET 6\Creando Web APIs profesionales con NET 6\visualstudio\tienda\Core\obj\Debug\net6.0\Core.AssemblyInfo.cs
+C:\Users\Rolando\Desktop\Udemy\NET 6\Creando Web APIs profesionales con NET 6\visualstudio\tienda\Core\obj\Debug\net6.0\Core.csproj.CoreCompileInputs.cache
+C:\Users\Rolando\Desktop\Udemy\NET 6\Creando Web APIs profesionales con NET 6\visualstudio\tienda\Core\obj\Debug\net6.0\Core.dll
+C:\Users\Rolando\Desktop\Udemy\NET 6\Creando Web APIs profesionales con NET 6\visualstudio\tienda\Core\obj\Debug\net6.0\refint\Core.dll
+C:\Users\Rolando\Desktop\Udemy\NET 6\Creando Web APIs profesionales con NET 6\visualstudio\tienda\Core\obj\Debug\net6.0\Core.pdb
+C:\Users\Rolando\Desktop\Udemy\NET 6\Creando Web APIs profesionales con NET 6\visualstudio\tienda\Core\obj\Debug\net6.0\ref\Core.dll
