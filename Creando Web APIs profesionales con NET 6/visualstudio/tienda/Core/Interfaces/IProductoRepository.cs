@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
-    //public interface IProductoRepository : IGenericRepository<Producto>
-    public interface IProductoRepository 
+    public interface IProductoRepository : IGenericRepository<Producto>
     {
 
         Task<IEnumerable<Producto>> GetProductosMasCaros(int cantidad);
