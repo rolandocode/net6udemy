@@ -1,12 +1,14 @@
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using API.Extensions;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.ConfigureCors();
 builder.Services.AddApplicationServices();
+builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
 
 builder.Services.AddControllers();
 
