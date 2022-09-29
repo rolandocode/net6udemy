@@ -1,15 +1,17 @@
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.ConfigureCors();
+builder.Services.AddApplicationServices();
 
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<TiendaContext>(options =>
 {
-
     var serverVersion = new MySqlServerVersion(new Version(8, 0, 30));
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), serverVersion);
 
@@ -45,6 +47,8 @@ using (var scope = app.Services.CreateScope())
         logger.LogError(ex, " Ocurrió un error durante la migración ");
     }
 }
+
+app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
 
