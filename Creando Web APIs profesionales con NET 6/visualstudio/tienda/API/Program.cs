@@ -2,6 +2,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using API.Extensions;
 using System.Reflection;
+using AspNetCoreRateLimit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +11,14 @@ builder.Services.ConfigureCors();
 builder.Services.AddApplicationServices();
 builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
 
-builder.Services.AddControllers();
+builder.Services.ConfigureRateLimiting();
+builder.Services.ConfigureApiVersionng();
+
+builder.Services.AddControllers(options => {
+    options.RespectBrowserAcceptHeader = true;
+    options.ReturnHttpNotAcceptable = true;
+}).AddXmlDataContractSerializerFormatters();
+
 
 builder.Services.AddDbContext<TiendaContext>(options =>
 {
@@ -25,6 +33,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseIpRateLimiting();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -39,5 +39,29 @@ namespace Infrastructure.Repositories
                 .Include(p => p.Categoria)
                 .ToListAsync();
         }
+
+        public override async Task<(int totalRegistros, IEnumerable<Producto> registros)> GetAllAsync(
+            int pageIndex, int pageSize, string search)
+        {
+
+            //var consulta = _context.Productos.AsQueryable();
+            var consulta = _context.Productos as IQueryable<Producto>;
+
+            if (!string.IsNullOrWhiteSpace(search))
+                consulta = consulta.Where(w => w.Nombre.ToLower().Contains(search));
+
+            var totalRegistros = await consulta.
+                                 CountAsync();
+
+            var registros = await consulta
+                            .Include(u => u.Marca)
+                            .Include(u => u.Categoria)
+                            .Skip((pageIndex - 1) * pageSize)
+                            .Take(pageSize)
+                            .ToListAsync();
+            return (totalRegistros, registros);
+
+        }
     }
+
 }

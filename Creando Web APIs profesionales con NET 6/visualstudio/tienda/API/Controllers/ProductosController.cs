@@ -1,4 +1,5 @@
 ﻿using API.DTO;
+using API.Helpers;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
@@ -9,6 +10,8 @@ using System.Xml.Linq;
 
 namespace API.Controllers
 {
+    [ApiVersion("1.0")]
+    [ApiVersion("1.1")]
 
     public class ProductosController : BaseApiController
     {
@@ -23,11 +26,28 @@ namespace API.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<ProductoListDTO>>> Get()
+        public async Task<ActionResult<Pager<ProductoListDTO>>> Get([FromQuery] Params productParams)
+        {
+            var resultado = await _unitOfWork.Productos.GetAllAsync(productParams.PageIndex, productParams.PageSize, productParams.Search);
+            //return _mapper.Map<List<ProductoListDTO>>(productos); 
+
+            Response.Headers.Add("X-InliceCount", resultado.totalRegistros.ToString());
+
+            var listaProductosDTO = _mapper.Map<List<ProductoListDTO>>(resultado.registros);
+            return new Pager<ProductoListDTO>(listaProductosDTO, resultado.totalRegistros
+                , productParams.PageIndex, productParams.PageSize, productParams.Search);
+        }
+
+        [HttpGet]
+        [MapToApiVersion("1.1")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<ProductoDTO>>> Get11()
         {
             var productos = await _unitOfWork.Productos.GetAllAsync();
-            return _mapper.Map<List<ProductoListDTO>>(productos); 
+            return _mapper.Map<List<ProductoDTO>>(productos);
         }
+
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -76,7 +96,7 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            var producto = _mapper.Map<Producto>(productoDTO); 
+            var producto = _mapper.Map<Producto>(productoDTO);
 
             _unitOfWork.Productos.Update(producto);
             await _unitOfWork.SaveAsync();
